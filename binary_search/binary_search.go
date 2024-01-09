@@ -1,4 +1,4 @@
-package binary_search
+package binarysearch
 
 import (
 	"errors"
@@ -6,6 +6,7 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+// O(log n)
 func BinarySearch[T constraints.Ordered](orderedArray []T, elementToFind T) (*int, error) {
 	start := 0
 	end := len(orderedArray) - 1
