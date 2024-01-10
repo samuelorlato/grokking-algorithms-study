@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	selectionsort "github.com/samuelorlato/grokking-algorithms-study/selection_sort"
+	"github.com/samuelorlato/grokking-algorithms-study/recursion"
 )
 
 func main() {
-	array := []int{7, 10, 1, 2, 99, 205, 15, 17, 901, 532}
-	orderedArray := selectionsort.SelectionSort[int](array)
-	fmt.Println(orderedArray)
+	slice := []float64{5, 2, 3, 50, 4, 4, 1}
+	sum := recursion.MaxValueFromSlice(slice)
+	fmt.Println(sum)
 }
