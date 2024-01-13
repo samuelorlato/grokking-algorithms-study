@@ -2,29 +2,34 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"math"
 
-	breadthfirstsearch "github.com/samuelorlato/grokking-algorithms-study/breadth_first_search"
+	dijkstraalgorithm "github.com/samuelorlato/grokking-algorithms-study/dijkstra_algorithm"
 )
 
-func startsWithZ(s string) bool {
-	return strings.Split(s, "")[0] == "z" || strings.Split(s, "")[0] == "Z"
-}
-
 func main() {
-	graph := map[string][]string{}
-	graph["arthur"] = []string{"alice", "ana", "clara"}
-	graph["alice"] = []string{"jonas", "clara", "arthur"}
-	graph["ana"] = []string{"samuel", "arthur"}
-	graph["clara"] = []string{"matheus", "alice", "arthur"}
-	graph["jonas"] = []string{}
-	graph["samuel"] = []string{"zaqueu"}
-	graph["matheus"] = []string{}
-	graph["zaqueu"] = []string{"leandro"}
-	graph["leandro"] = []string{}
+	graph := map[string]map[string]float64{}
+	graph["start"] = map[string]float64{}
+	graph["start"]["a"] = 6
+	graph["start"]["b"] = 2
+	graph["a"] = map[string]float64{}
+	graph["a"]["end"] = 1
+	graph["b"] = map[string]float64{}
+	graph["b"]["a"] = 3
+	graph["b"]["end"] = 5
+	graph["end"] = map[string]float64{}
 
-	firstNameThatStartsWithZ := breadthfirstsearch.BreadthFirstSearch[string]("arthur", graph, startsWithZ)
-	if firstNameThatStartsWithZ != nil {
-		fmt.Println(*firstNameThatStartsWithZ)
-	}
+	costsMap := map[string]float64{}
+	costsMap["a"] = 6
+	costsMap["b"] = 2
+	costsMap["end"] = math.Inf(1)
+
+	parentsMap := map[string]string{}
+	parentsMap["a"] = "start"
+	parentsMap["b"] = "start"
+	parentsMap["end"] = ""
+
+	newParents, newCosts := dijkstraalgorithm.FindLowestCostPath(parentsMap, costsMap, graph)
+	fmt.Println(newParents)
+	fmt.Println(newCosts)
 }
